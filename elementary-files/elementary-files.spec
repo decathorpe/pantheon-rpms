@@ -96,8 +96,9 @@ appstream-util validate-relax --nonet \
 
 
 %files -f %{appname}.lang
-%doc AUTHORS README.md
 %license COPYING
+%doc AUTHORS
+%doc README.md
 
 %{_bindir}/%{appname}
 %{_bindir}/%{appname}-daemon
