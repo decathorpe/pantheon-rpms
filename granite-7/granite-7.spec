@@ -65,18 +65,23 @@ appstream-util validate-relax --nonet \
 
 
 %files -f granite-7.lang
-%doc README.md
 %license COPYING
+%doc README.md
+
 %{_libdir}/libgranite-7.so.7
 %{_libdir}/libgranite-7.so.7.*
 %{_libdir}/girepository-1.0/Granite-7.0.typelib
+
 %{_metainfodir}/%{name}.appdata.xml
 
 %files devel
 %{_bindir}/granite-7-demo
+
 %{_libdir}/libgranite-7.so
 %{_libdir}/pkgconfig/granite-7.pc
+
 %{_includedir}/granite-7/
+
 %{_datadir}/applications/io.elementary.granite-7.demo.desktop
 %{_datadir}/icons/hicolor/*/apps/io.elementary.granite-7.svg
 %{_datadir}/gir-1.0/Granite-7.0.gir
