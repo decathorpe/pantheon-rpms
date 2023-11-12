@@ -2,7 +2,7 @@
 %global appname io.elementary.notifications
 
 Name:           elementary-notifications
-Version:        6.0.3
+Version:        7.0.1
 Release:        1%{?dist}
 Summary:        GTK Notifications Server
 License:        GPL-3.0-or-later
@@ -16,6 +16,7 @@ BuildRequires:  libappstream-glib
 BuildRequires:  meson
 BuildRequires:  vala
 
+BuildRequires:  pkgconfig(gio-2.0)
 BuildRequires:  pkgconfig(granite) >= 5.4.0
 BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(libcanberra)
@@ -47,7 +48,7 @@ This package contains a demo application.
 %meson_install
 
 # remove the specified stock icon from appdata (invalid for desktop components)
-sed -i '/icon type="stock"/d' %{buildroot}/%{_datadir}/metainfo/%{appname}.appdata.xml
+sed -i '/icon type="stock"/d' %{buildroot}/%{_datadir}/metainfo/%{appname}.metainfo.xml
 
 
 %check
@@ -55,7 +56,7 @@ desktop-file-validate \
     %{buildroot}/%{_sysconfdir}/xdg/autostart/%{appname}.desktop
 
 appstream-util validate-relax --nonet \
-    %{buildroot}/%{_datadir}/metainfo/%{appname}.appdata.xml
+    %{buildroot}/%{_datadir}/metainfo/%{appname}.metainfo.xml
 
 
 %files
@@ -67,7 +68,7 @@ appstream-util validate-relax --nonet \
 %{_bindir}/%{appname}
 
 %{_datadir}/glib-2.0/schemas/%{appname}.gschema.xml
-%{_datadir}/metainfo/%{appname}.appdata.xml
+%{_datadir}/metainfo/%{appname}.metainfo.xml
 
 %files demo
 %{_bindir}/%{appname}.demo
@@ -76,6 +77,6 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
-* Tue May 23 2023 Fabio Valentini <decathorpe@gmail.com> - 6.0.3-1
+* Sun Nov 12 2023 Fabio Valentini <decathorpe@gmail.com> - 7.0.1-1
 - Initial packaging
 
