@@ -1,7 +1,7 @@
 %global __provides_exclude_from ^%{_libdir}/gala/.*\\.so$
 
 Name:           gala
-Version:        7.0.3
+Version:        7.1.3
 Release:        1%{?dist}
 Summary:        Gala window manager
 License:        GPL-3.0-or-later
@@ -12,12 +12,21 @@ Source:         %{url}/archive/%{version}/gala-%{version}.tar.gz
 BuildRequires:  desktop-file-utils
 BuildRequires:  libappstream-glib
 BuildRequires:  meson
+BuildRequires:  systemd-rpm-macros
 BuildRequires:  vala >= 0.46
 
+%if 0%{?fedora} >= 39
+BuildRequires:  pkgconfig(libmutter-13)
+BuildRequires:  pkgconfig(mutter-clutter-13)
+BuildRequires:  pkgconfig(mutter-cogl-13)
+BuildRequires:  pkgconfig(mutter-cogl-pango-13)
+%endif
+%if 0%{?fedora} == 38
 BuildRequires:  pkgconfig(libmutter-12)
 BuildRequires:  pkgconfig(mutter-clutter-12)
 BuildRequires:  pkgconfig(mutter-cogl-12)
 BuildRequires:  pkgconfig(mutter-cogl-pango-12)
+%endif
 
 BuildRequires:  pkgconfig(gee-0.8)
 BuildRequires:  pkgconfig(gexiv2)
@@ -67,7 +76,7 @@ This package contains the development headers.
 %find_lang gala
 
 # remove the specified stock icon from appdata (invalid in libappstream-glib)
-sed -i '/icon type="stock"/d' %{buildroot}/%{_datadir}/metainfo/%{name}.appdata.xml
+sed -i '/icon type="stock"/d' %{buildroot}/%{_datadir}/metainfo/%{name}.metainfo.xml
 
 
 %check
@@ -78,7 +87,20 @@ desktop-file-validate \
     %{buildroot}/%{_sysconfdir}/xdg/autostart/gala-daemon.desktop
 
 appstream-util validate-relax --nonet \
-    %{buildroot}/%{_datadir}/metainfo/%{name}.appdata.xml
+    %{buildroot}/%{_datadir}/metainfo/%{name}.metainfo.xml
+
+
+%post
+%systemd_user_post io.elementary.gala@wayland.service
+%systemd_user_post io.elementary.gala@x11.service
+
+%preun
+%systemd_user_preun io.elementary.gala@wayland.service
+%systemd_user_preun io.elementary.gala@x11.service
+
+%postun
+%systemd_user_postun io.elementary.gala@wayland.service
+%systemd_user_postun io.elementary.gala@x11.service
 
 
 %files -f gala.lang
@@ -94,10 +116,11 @@ appstream-util validate-relax --nonet \
 %{_datadir}/applications/gala*.desktop
 %{_datadir}/glib-2.0/schemas/org.pantheon.desktop.gala.gschema.xml
 %{_datadir}/glib-2.0/schemas/20_elementary.pantheon.wm.gschema.override
-%{_datadir}/metainfo/%{name}.appdata.xml
+%{_datadir}/metainfo/%{name}.metainfo.xml
 
-%exclude %{_userunitdir}/gala-x11.service
-%exclude %{_userunitdir}/gala-x11.target
+%{_userunitdir}/io.elementary.gala.target
+%{_userunitdir}/io.elementary.gala@x11.service
+%{_userunitdir}/io.elementary.gala@wayland.service
 
 
 %files devel
@@ -111,6 +134,9 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
+* Sun Nov 12 2023 Fabio Valentini <decathorpe@gmail.com> - 7.1.3-1
+- Update to version 7.1.3.
+
 * Tue May 23 2023 Fabio Valentini <decathorpe@gmail.com> - 7.0.3-1
 - Initial packaging
 
