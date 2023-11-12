@@ -104,6 +104,11 @@ appstream-util validate-relax --nonet \
 
 
 %files -f gala.lang
+%license COPYING
+%doc AUTHORS
+%doc HACKING
+%doc README.md
+
 %config(noreplace) %{_sysconfdir}/xdg/autostart/gala-daemon.desktop
 
 %{_bindir}/gala
