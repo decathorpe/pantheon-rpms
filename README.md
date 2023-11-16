@@ -1,6 +1,6 @@
 # Pantheon packages for Fedora 38+ (work-in-progress)
 
-This repository contains WIP packages of Pantheon for Fedora 38 and Rawhide,
+This repository contains WIP packages of Pantheon for Fedora 38, 39, and Rawhide,
 based on my original packaging for Fedora < 37.
 
 The goal is to add the packages back to Fedora once enough components have
