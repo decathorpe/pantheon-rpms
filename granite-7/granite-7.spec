@@ -4,10 +4,10 @@ provides complex widgets and convenience functions designed for use in
 apps built for elementary OS.}
 
 Name:           granite-7
-Version:        7.2.0
+Version:        7.4.0
 Release:        1%{?dist}
 Summary:        Extend GTK with common widgets and utilities
-License:        LGPL-3.0-or-later
+License:        LGPL-3.0-or-later AND LGPL-2.1-or-later AND GPL-2.0-or-later
 
 URL:            https://github.com/elementary/granite
 Source:         %{url}/archive/%{version}/granite-%{version}.tar.gz
@@ -15,7 +15,7 @@ Source:         %{url}/archive/%{version}/granite-%{version}.tar.gz
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
 BuildRequires:  libappstream-glib
-BuildRequires:  meson >= 0.49
+BuildRequires:  meson >= 0.56.0
 BuildRequires:  sassc
 BuildRequires:  vala >= 0.48.2
 
@@ -53,7 +53,7 @@ This package contains the development headers.
 %find_lang granite-7
 
 # remove the specified stock icon from appdata (invalid for desktop components)
-sed -i '/icon type="stock"/d' %{buildroot}/%{_datadir}/metainfo/granite-7.appdata.xml
+sed -i '/icon type="stock"/d' %{buildroot}/%{_datadir}/metainfo/granite-7.metainfo.xml
 
 
 %check
@@ -61,7 +61,7 @@ desktop-file-validate \
     %{buildroot}/%{_datadir}/applications/io.elementary.granite-7.demo.desktop
 
 appstream-util validate-relax --nonet \
-    %{buildroot}/%{_datadir}/metainfo/granite-7.appdata.xml
+    %{buildroot}/%{_metainfodir}/%{name}.metainfo.xml
 
 
 %files -f granite-7.lang
@@ -72,7 +72,7 @@ appstream-util validate-relax --nonet \
 %{_libdir}/libgranite-7.so.7.*
 %{_libdir}/girepository-1.0/Granite-7.0.typelib
 
-%{_metainfodir}/%{name}.appdata.xml
+%{_metainfodir}/%{name}.metainfo.xml
 
 %files devel
 %{_bindir}/granite-7-demo
@@ -90,6 +90,9 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
+* Sat Nov 18 2023 Fabio Valentini <decathorpe@gmail.com> - 7.4.0-1
+- Update to version 7.4.0.
+
 * Tue May 23 2023 Fabio Valentini <decathorpe@gmail.com> - 7.2.0-1
 - Initial packaging
 
