@@ -1,3 +1,10 @@
+# review requests
+
+- elementary-notifications: https://bugzilla.redhat.com/show_bug.cgi?id=2250478
+- granite-7: https://bugzilla.redhat.com/show_bug.cgi?id=2250477
+
+# packages
+
 - appcenter
 - switchboard-plug-datetime
 - switchboard-plug-keyboard
