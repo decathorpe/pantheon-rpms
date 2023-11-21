@@ -27,7 +27,7 @@ elementary Notifications is a GTK notification server for Pantheon.
 
 %package demo
 Summary:        GTK Notifications Server (demo application)
-Requires:       %{name} = %{version}-%{release}
+Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 %description demo
 elementary Notifications is a GTK notification server for Pantheon.
