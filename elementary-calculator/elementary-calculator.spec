@@ -5,12 +5,13 @@ Name:           elementary-calculator
 Summary:        Calculator app designed for elementary
 Version:        2.0.2
 Release:        1%{?dist}
-License:        GPLv3+
+License:        GPL-3.0-or-later
 
 URL:            https://github.com/elementary/%{srcname}
 Source0:        %{url}/archive/%{version}/%{srcname}-%{version}.tar.gz
 
 BuildRequires:  desktop-file-utils
+BuildRequires:  gcc
 BuildRequires:  gettext
 BuildRequires:  libappstream-glib
 BuildRequires:  meson >= 0.56
@@ -20,9 +21,6 @@ BuildRequires:  pkgconfig(granite-7) >= 7.0.0
 BuildRequires:  pkgconfig(gtk4)
 
 Requires:       hicolor-icon-theme
-
-Provides:       pantheon-calculator = %{version}-%{release}
-Obsoletes:      pantheon-calculator < 0.1.3-5
 
 %description
 A simple calculator for everyday use.
