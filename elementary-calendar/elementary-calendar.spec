@@ -3,16 +3,21 @@
 
 %global __provides_exclude_from ^%{_libdir}/%{appname}/.*\\.so$
 
+%global _description %{expand:
+A slim, lightweight calendar app that syncs and manages multiple
+calendars in one place, like Google Calendar, Outlook and CalDAV.}
+
 Name:           elementary-calendar
 Summary:        Desktop calendar app designed for elementary
 Version:        7.0.0
 Release:        1%{?dist}
-License:        GPLv3+
+License:        GPL-3.0-or-later AND GPL-2.0-or-later AND LGPL-2.1-or-later AND LGPL-2.0-or-later
 
 URL:            https://github.com/elementary/calendar
 Source0:        %{url}/archive/%{version}/%{srcname}-%{version}.tar.gz
 
 BuildRequires:  desktop-file-utils
+BuildRequires:  gcc
 BuildRequires:  gettext
 BuildRequires:  libappstream-glib
 BuildRequires:  meson >= 0.56.0
@@ -48,17 +53,14 @@ BuildRequires:  pkgconfig(libsoup-2.4)
 
 Requires:       hicolor-icon-theme
 
-%description
-A slim, lightweight calendar app that syncs and manages multiple
-calendars in one place, like Google Calendar, Outlook and CalDAV.
+%description %{_description}
 
 
 %package        devel
 Summary:        The official elementary calendar (devel files)
 Requires:       %{name}%{?_isa} = %{version}-%{release}
-%description    devel
-A slim, lightweight calendar app that syncs and manages multiple
-calendars in one place, like Google Calendar, Outlook and CalDAV.
+
+%description    devel %{_description}
 
 This package contains the development files.
 
