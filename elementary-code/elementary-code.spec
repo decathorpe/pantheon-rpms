@@ -7,12 +7,13 @@ Name:           elementary-code
 Summary:        Code editor from elementary
 Version:        7.1.0
 Release:        1%{?dist}
-License:        GPLv3
+License:        GPL-3.0-or-later AND LGPL-3.0-only AND LGPL-3.0-or-later AND GPL-2.0-or-later
 
 URL:            https://github.com/elementary/%{srcname}
 Source0:        %{url}/archive/%{version}/%{srcname}-%{version}.tar.gz
 
 BuildRequires:  desktop-file-utils
+BuildRequires:  gcc
 BuildRequires:  gettext
 BuildRequires:  libappstream-glib
 BuildRequires:  meson >= 0.58.0
@@ -47,6 +48,7 @@ Requires:       hicolor-icon-theme
 %package        devel
 Summary:        The text editor that works (development files)
 Requires:       %{name}%{?_isa} = %{version}-%{release}
+
 %description    devel
 %{summary}.
 
