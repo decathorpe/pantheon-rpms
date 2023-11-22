@@ -5,12 +5,13 @@ Name:           elementary-camera
 Summary:        Camera app designed for elementary
 Version:        6.2.2
 Release:        1%{?dist}
-License:        GPLv3
+License:        GPL-3.0-or-later
 
 URL:            https://github.com/elementary/camera
 Source0:        %{url}/archive/%{version}/%{srcname}-%{version}.tar.gz
 
 BuildRequires:  desktop-file-utils
+BuildRequires:  gcc
 BuildRequires:  gettext
 BuildRequires:  libappstream-glib
 BuildRequires:  meson >= 0.46
