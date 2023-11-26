@@ -40,6 +40,7 @@ BuildRequires:  pkgconfig(pangoft2)
 BuildRequires:  pkgconfig(vte-2.91)
 
 Requires:       hicolor-icon-theme
+Requires:       polkit
 
 %description
 %{summary}.

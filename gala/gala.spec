@@ -10,6 +10,7 @@ URL:            https://github.com/elementary/gala
 Source:         %{url}/archive/%{version}/gala-%{version}.tar.gz
 
 BuildRequires:  desktop-file-utils
+BuildRequires:  gcc
 BuildRequires:  libappstream-glib
 BuildRequires:  meson
 BuildRequires:  systemd-rpm-macros
