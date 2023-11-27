@@ -60,7 +60,7 @@ Gala is Pantheon's Window Manager, part of the elementary project.
 Summary:        Gala window manager X11 support
 BuildArch:      noarch
 
-Requires:       %{name}%{?_isa} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 Requires:       gnome-session
 Requires:       xorg-x11-server-Xorg
 
@@ -74,7 +74,7 @@ This package contains the support files for running gala on X11.
 Summary:        Gala window manager Wayland support
 BuildArch:      noarch
 
-Requires:       %{name}%{?_isa} = %{version}-%{release}
+Requires:       %{name} = %{version}-%{release}
 Requires:       gnome-session
 Requires:       xorg-x11-server-Xwayland
 
