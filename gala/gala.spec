@@ -49,8 +49,39 @@ Requires:       dbus
 # GTK-based notifications use this new notifications server
 Requires:       elementary-notifications
 
+# https://bugzilla.redhat.com/show_bug.cgi?id=605675
+Provides:       firstboot(windowmanager) = gala
+
 %description
 Gala is Pantheon's Window Manager, part of the elementary project.
+
+
+%package        x11
+Summary:        Gala window manager X11 support
+BuildArch:      noarch
+
+Requires:       %{name}%{?_isa} = %{version}-%{release}
+Requires:       gnome-session
+Requires:       xorg-x11-server-Xorg
+
+%description    x11
+Gala is Pantheon's Window Manager, part of the elementary project.
+
+This package contains the support files for running gala on X11.
+
+
+%package        wayland
+Summary:        Gala window manager Wayland support
+BuildArch:      noarch
+
+Requires:       %{name}%{?_isa} = %{version}-%{release}
+Requires:       gnome-session
+Requires:       xorg-x11-server-Xwayland
+
+%description    wayland
+Gala is Pantheon's Window Manager, part of the elementary project.
+
+This package contains the support files for running gala on Wayland.
 
 
 %package        devel
@@ -91,17 +122,23 @@ appstream-util validate-relax --nonet \
     %{buildroot}/%{_datadir}/metainfo/%{name}.metainfo.xml
 
 
-%post
-%systemd_user_post io.elementary.gala@wayland.service
+%post x11
 %systemd_user_post io.elementary.gala@x11.service
 
-%preun
-%systemd_user_preun io.elementary.gala@wayland.service
+%post wayland
+%systemd_user_post io.elementary.gala@wayland.service
+
+%preun x11
 %systemd_user_preun io.elementary.gala@x11.service
 
-%postun
-%systemd_user_postun io.elementary.gala@wayland.service
+%preun wayland
+%systemd_user_preun io.elementary.gala@wayland.service
+
+%postun x11
 %systemd_user_postun io.elementary.gala@x11.service
+
+%postun wayland
+%systemd_user_postun io.elementary.gala@wayland.service
 
 
 %files -f gala.lang
@@ -125,9 +162,12 @@ appstream-util validate-relax --nonet \
 %{_datadir}/metainfo/%{name}.metainfo.xml
 
 %{_userunitdir}/io.elementary.gala.target
-%{_userunitdir}/io.elementary.gala@x11.service
-%{_userunitdir}/io.elementary.gala@wayland.service
 
+%files x11
+%{_userunitdir}/io.elementary.gala@x11.service
+
+%files wayland
+%{_userunitdir}/io.elementary.gala@wayland.service
 
 %files devel
 %{_includedir}/gala/
