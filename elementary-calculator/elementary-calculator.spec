@@ -45,6 +45,8 @@ functions (sin, cos, and tan).
 
 
 %check
+%meson_test
+
 desktop-file-validate \
     %{buildroot}/%{_datadir}/applications/%{appname}.desktop
 
