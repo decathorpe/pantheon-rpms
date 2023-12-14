@@ -5,9 +5,9 @@
 
 Name:           elementary-files
 Summary:        File manager from elementary
-Version:        6.5.2
-Release:        0%{?dist}
-License:        GPLv3
+Version:        6.5.3
+Release:        1%{?dist}
+License:        GPL-3.0-or-later AND GPL-3.0-only AND GPL-2.0-or-later AND LGPL-3.0-or-later AND LGPL-3.0-only AND LGPL-2.1-or-later
 
 URL:            https://github.com/elementary/%{srcname}
 Source:         %{url}/archive/%{version}/%{srcname}-%{version}.tar.gz
@@ -33,9 +33,11 @@ BuildRequires:  pkgconfig(libcanberra) >= 0.30
 BuildRequires:  pkgconfig(libgit2-glib-1.0)
 BuildRequires:  pkgconfig(libhandy-1) >= 0.83.0
 BuildRequires:  pkgconfig(pango) >= 1.1.2
-BuildRequires:  pkgconfig(plank) >= 0.10.9
 BuildRequires:  pkgconfig(sqlite3)
 BuildRequires:  pkgconfig(systemd) >= 206
+
+Requires:       dbus-common
+Requires:       polkit
 
 %description
 The simple, powerful, and sexy file manager from elementary.
@@ -44,6 +46,8 @@ The simple, powerful, and sexy file manager from elementary.
 %package        portal
 Summary:        File manager from elementary (flatpak file chooser portal)
 Requires:       %{name}%{?_isa} = %{version}-%{release}
+
+Requires:       dbus-common
 Requires:       xdg-desktop-portal
 
 %description    portal
@@ -105,7 +109,7 @@ appstream-util validate-relax --nonet \
 %{_bindir}/%{appname}-pkexec
 
 %{_libdir}/%{appname}/
-%{_libdir}/libpantheon-files-core.so.6*
+%{_libdir}/libpantheon-files-core.so.6{,.*}
 
 %{_datadir}/applications/%{appname}.desktop
 %{_datadir}/dbus-1/services/%{appname}.service
@@ -126,8 +130,12 @@ appstream-util validate-relax --nonet \
 %{_libdir}/libpantheon-files-core.so
 %{_libdir}/pkgconfig/pantheon-files-core.pc
 
+%dir %{_datadir}/vala
+%dir %{_datadir}/vala/vapi
 %{_datadir}/vala/vapi/pantheon-files-core.vapi
 
 
 %changelog
-%autochangelog
+* Thu Dec 14 2023 Fabio Valentini <decathorpe@gmail.com> - 6.5.3-1
+- Initial packaging
+
