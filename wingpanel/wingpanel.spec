@@ -1,8 +1,8 @@
 %global appname io.elementary.wingpanel
 
-%global commit      d6009d9f0d5c7479172093447ccceccba86ff1f3
+%global commit      0fb4a14b3134b07fd4510f3bfec46b4f0193f20a
 %global shortcommit %(c=%{commit}; echo ${c:0:7}) 
-%global commitdate  20230915
+%global commitdate  20231206
 
 %global _description %{expand:
 Stylish top panel that holds indicators and spawns an application
@@ -10,9 +10,9 @@ launcher.}
 
 Name:           wingpanel
 Version:        3.0.5
-Release:        1.%{commitdate}.git%{shortcommit}%{?dist}
+Release:        3.%{commitdate}.git%{shortcommit}%{?dist}
 Summary:        Stylish top panel
-License:        GPL-3.0-or-later
+License:        GPL-3.0-or-later AND GPL-2.0-or-later AND LGPL-2.1-or-later
 
 URL:            https://github.com/elementary/wingpanel
 Source0:        %{url}/archive/%{commit}/wingpanel-%{shortcommit}.tar.gz
@@ -120,7 +120,10 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
-* Sun Nov 12 2023 Fabio Valentini <decathorpe@gmail.com> - 3.0.5-1.20230915.gitd6009d9
+* Thu Dec 14 2023 Fabio Valentini <decathorpe@gmail.com> - 3.0.5-3.20231206.git0fb4a14
+- Bump to commit 0fb4a14.
+
+* Sun Nov 12 2023 Fabio Valentini <decathorpe@gmail.com> - 3.0.5-2.20230915.gitd6009d9
 - Bump to commit d6009d9.
 
 * Tue May 23 2023 Fabio Valentini <decathorpe@gmail.com> - 3.0.3-1.20230423.git0cbf289
