@@ -7,10 +7,10 @@ Name:           elementary-mail
 Summary:        Mail app designed for elementary
 Version:        7.2.0
 Release:        1%{?dist}
-License:        GPLv3+
+License:        GPL-3.0-or-later AND LGPL-3.0-or-later AND LGPL-2.1-or-later AND LGPL-2.1-only
 
 URL:            https://github.com/elementary/mail
-Source0:        %{url}/archive/%{version}/%{name}-%{version}.tar.gz
+Source0:        %{url}/archive/%{version}/%{srcname}-%{version}.tar.gz
 
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
