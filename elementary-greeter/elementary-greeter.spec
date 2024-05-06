@@ -1,15 +1,15 @@
 %global srcname greeter
 %global appname io.elementary.greeter
 
-%global commit      7111c2201d7bb5042ab76069aafb899bef360e1c
+%global commit      3ff7809bb0f56119e40702825bab899af1a25010
 %global shortcommit %(c=%{commit}; echo ${c:0:7}) 
-%global commitdate  20231109
+%global commitdate  20240402
 
 Name:           elementary-greeter
 Summary:        LightDM Login Screen for the elementary desktop
 Version:        7.0.0
-Release:        1.%{commitdate}.git%{shortcommit}%{?dist}
-License:        GPLv3
+Release:        2.%{commitdate}.git%{shortcommit}%{?dist}
+License:        GPL-3.0-only AND GPL-3.0-or-later AND GPL-2.0-or-later
 
 URL:            https://github.com/elementary/greeter
 Source0:        %{url}/archive/%{commit}/%{srcname}-%{shortcommit}.tar.gz
@@ -38,7 +38,14 @@ BuildRequires:  pkgconfig(libhandy-1)
 BuildRequires:  pkgconfig(liblightdm-gobject-1)
 BuildRequires:  pkgconfig(x11)
 
-%if 0%{?fedora} >= 39
+%if 0%{?fedora} >= 40
+BuildRequires:  pkgconfig(libmutter-14)
+BuildRequires:  pkgconfig(mutter-clutter-14)
+BuildRequires:  pkgconfig(mutter-cogl-14)
+BuildRequires:  pkgconfig(mutter-cogl-pango-14)
+%endif
+
+%if 0%{?fedora} == 39
 BuildRequires:  pkgconfig(libmutter-13)
 BuildRequires:  pkgconfig(mutter-clutter-13)
 BuildRequires:  pkgconfig(mutter-cogl-13)
@@ -115,6 +122,9 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
+* Mon May 06 2024 Fabio Valentini <decathorpe@gmail.com> - 7.0.0-2.20240402.git3ff7809
+- Bump to commit 3ff7809 for compatibility with mutter 46.
+
 * Wed Nov 15 2023 Fabio Valentini <decathorpe@gmail.com> - 7.0.0-1.20231109.git7111c22
 - Initial packaging
 
