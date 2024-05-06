@@ -7,7 +7,7 @@ Name:           wingpanel-indicator-a11y
 Summary:        Wingpanel Universal Access Indicator
 Version:        1.0.2
 Release:        1%{?dist}
-License:        GPLv2
+License:        GPL-2.0-or-later
 
 URL:            https://github.com/elementary/wingpanel-indicator-a11y
 Source0:        %{url}/archive/%{version}/%{srcname}-%{version}.tar.gz
