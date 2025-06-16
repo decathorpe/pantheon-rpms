@@ -1,14 +1,14 @@
 %global srcname greeter
 %global appname io.elementary.greeter
 
-%global commit      3ff7809bb0f56119e40702825bab899af1a25010
+%global commit      4bcb6ee549d95592f93f26cc1d2faa4a4b269f51
 %global shortcommit %(c=%{commit}; echo ${c:0:7}) 
-%global commitdate  20240402
+%global gitdate     20250611
 
 Name:           elementary-greeter
 Summary:        LightDM Login Screen for the elementary desktop
-Version:        7.0.0
-Release:        2.%{commitdate}.git%{shortcommit}%{?dist}
+Version:        8.0.1^%{gitdate}.git%{shortcommit}
+Release:        %autorelease
 License:        GPL-3.0-only AND GPL-3.0-or-later AND GPL-2.0-or-later
 
 URL:            https://github.com/elementary/greeter
@@ -20,47 +20,39 @@ BuildRequires:  libappstream-glib
 BuildRequires:  meson >= 0.58.0
 BuildRequires:  vala
 
-BuildRequires:  mesa-libEGL-devel
+%if 0%{?fedora} >= 42
+BuildRequires:  pkgconfig(libmutter-16)
+BuildRequires:  pkgconfig(mutter-clutter-16)
+BuildRequires:  pkgconfig(mutter-cogl-16)
+BuildRequires:  pkgconfig(mutter-mtk-16)
+%endif
+%if 0%{?fedora} == 41
+BuildRequires:  pkgconfig(libmutter-15)
+BuildRequires:  pkgconfig(mutter-clutter-15)
+BuildRequires:  pkgconfig(mutter-cogl-15)
+BuildRequires:  pkgconfig(mutter-cogl-pango-15)
+BuildRequires:  pkgconfig(mutter-mtk-15)
+%endif
 
 BuildRequires:  pkgconfig(accountsservice)
 BuildRequires:  pkgconfig(clutter-gtk-1.0)
 BuildRequires:  pkgconfig(gdk-pixbuf-2.0)
+BuildRequires:  pkgconfig(gdk-wayland-3.0)
 BuildRequires:  pkgconfig(gdk-x11-3.0)
 BuildRequires:  pkgconfig(gee-0.8)
 BuildRequires:  pkgconfig(gio-2.0)
 BuildRequires:  pkgconfig(gio-unix-2.0)
 BuildRequires:  pkgconfig(gl)
+BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(gmodule-2.0)
 BuildRequires:  pkgconfig(gnome-desktop-3.0)
 BuildRequires:  pkgconfig(granite) >= 5.0
 BuildRequires:  pkgconfig(gtk+-3.0)
 BuildRequires:  pkgconfig(libhandy-1)
 BuildRequires:  pkgconfig(liblightdm-gobject-1)
+BuildRequires:  pkgconfig(wayland-client)
+BuildRequires:  pkgconfig(wayland-scanner)
 BuildRequires:  pkgconfig(x11)
-
-%if 0%{?fedora} >= 40
-BuildRequires:  pkgconfig(libmutter-14)
-BuildRequires:  pkgconfig(mutter-clutter-14)
-BuildRequires:  pkgconfig(mutter-cogl-14)
-BuildRequires:  pkgconfig(mutter-cogl-pango-14)
-%endif
-
-%if 0%{?fedora} == 39
-BuildRequires:  pkgconfig(libmutter-13)
-BuildRequires:  pkgconfig(mutter-clutter-13)
-BuildRequires:  pkgconfig(mutter-cogl-13)
-BuildRequires:  pkgconfig(mutter-cogl-pango-13)
-%endif
-
-%if 0%{?fedora} == 38
-BuildRequires:  pkgconfig(libmutter-12)
-BuildRequires:  pkgconfig(mutter-clutter-12)
-BuildRequires:  pkgconfig(mutter-cogl-12)
-BuildRequires:  pkgconfig(mutter-cogl-pango-12)
-%endif
-
-Provides:       pantheon-greeter = %{version}-%{release}
-Obsoletes:      pantheon-greeter < 3.2.0-7
 
 Requires:       lightdm%{?_isa}
 Requires:       wingpanel%{?_isa}
@@ -114,17 +106,14 @@ appstream-util validate-relax --nonet \
 %config(noreplace) %{_sysconfdir}/lightdm/%{appname}.conf
 
 %{_bindir}/%{appname}-compositor
+%{_bindir}/%{appname}-session-manager
 %{_sbindir}/%{appname}
 
+%{_datadir}/glib-2.0/schemas/%{appname}-compositor.gschema.xml
 %{_datadir}/lightdm/lightdm.conf.d/40-io.elementary.greeter.conf
 %{_datadir}/metainfo/%{appname}.metainfo.xml
 %{_datadir}/xgreeters/%{appname}.desktop
 
 
 %changelog
-* Mon May 06 2024 Fabio Valentini <decathorpe@gmail.com> - 7.0.0-2.20240402.git3ff7809
-- Bump to commit 3ff7809 for compatibility with mutter 46.
-
-* Wed Nov 15 2023 Fabio Valentini <decathorpe@gmail.com> - 7.0.0-1.20231109.git7111c22
-- Initial packaging
-
+%autochangelog
