@@ -3,9 +3,9 @@
 
 Name:           elementary-capnet-assist
 Summary:        Captive Portal Assistant for elementary
-Version:        2.4.4
-Release:        1%{?dist}
-License:        GPLv3+
+Version:        8.0.1
+Release:        %autorelease
+License:        GPL-3.0-or-later
 
 URL:            https://github.com/elementary/capnet-assist
 Source0:        %{url}/archive/%{version}/%{srcname}-%{version}.tar.gz
@@ -13,18 +13,17 @@ Source0:        %{url}/archive/%{version}/%{srcname}-%{version}.tar.gz
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
 BuildRequires:  libappstream-glib
-BuildRequires:  meson
+BuildRequires:  meson >= 0.57
 BuildRequires:  vala
 
-BuildRequires:  pkgconfig(gcr-3)
-BuildRequires:  pkgconfig(gcr-ui-3)
+BuildRequires:  pkgconfig(gcr-4)
 BuildRequires:  pkgconfig(gio-2.0)
 BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(gobject-2.0)
-BuildRequires:  pkgconfig(granite)
-BuildRequires:  pkgconfig(gtk+-3.0)
-BuildRequires:  pkgconfig(libhandy-1) >= 1.0.0
-BuildRequires:  pkgconfig(webkit2gtk-4.1)
+BuildRequires:  pkgconfig(granite-7) >= 7.0.0
+BuildRequires:  pkgconfig(gtk4)
+BuildRequires:  pkgconfig(libadwaita-1) >= 1.0.0
+BuildRequires:  pkgconfig(webkitgtk-6.0)
 
 Requires:       NetworkManager
 Requires:       hicolor-icon-theme
@@ -76,6 +75,4 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
-* Wed Nov 15 2023 Fabio Valentini <decathorpe@gmail.com> - 2.4.4-1
-- Initial packaging
-
+%autochangelog
