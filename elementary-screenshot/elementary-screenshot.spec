@@ -3,9 +3,9 @@
 
 Name:           elementary-screenshot
 Summary:        Screenshot tool designed for elementary
-Version:        6.0.4
-Release:        1%{?dist}
-License:        LGPLv3
+Version:        8.0.1
+Release:        %autorelease
+License:        LGPL-3.0-only
 
 URL:            https://github.com/elementary/screenshot
 Source0:        %{url}/archive/%{version}/%{srcname}-%{version}.tar.gz
@@ -13,14 +13,15 @@ Source0:        %{url}/archive/%{version}/%{srcname}-%{version}.tar.gz
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
 BuildRequires:  libappstream-glib
-BuildRequires:  meson >= 0.56
+BuildRequires:  meson >= 0.57
 BuildRequires:  vala >= 0.24
 
 BuildRequires:  pkgconfig(gdk-pixbuf-2.0)
 BuildRequires:  pkgconfig(glib-2.0)
-BuildRequires:  pkgconfig(granite) >= 6.0.0
-BuildRequires:  pkgconfig(gtk+-3.0) >= 3.12
-BuildRequires:  pkgconfig(libhandy-1) >= 0.83.0
+BuildRequires:  pkgconfig(gobject-2.0)
+BuildRequires:  pkgconfig(granite-7) >= 7.0.0
+BuildRequires:  pkgconfig(gtk4)
+BuildRequires:  pkgconfig(libportal)
 
 Requires:       hicolor-icon-theme
 
@@ -64,6 +65,4 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
-* Wed Nov 15 2023 Fabio Valentini <decathorpe@gmail.com> - 6.0.4-1
-- Initial packaging
-
+%autochangelog
