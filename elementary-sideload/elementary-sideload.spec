@@ -3,9 +3,9 @@
 
 Name:           elementary-sideload
 Summary:        Sideload flatpaks on Pantheon
-Version:        6.2.1
-Release:        1%{?dist}
-License:        GPLv3+
+Version:        6.3.0
+Release:        %autorelease
+License:        GPL-3.0-or-later
 
 URL:            https://github.com/elementary/sideload
 Source0:        %{url}/archive/%{version}/%{srcname}-%{version}.tar.gz
@@ -13,7 +13,7 @@ Source0:        %{url}/archive/%{version}/%{srcname}-%{version}.tar.gz
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
 BuildRequires:  libappstream-glib
-BuildRequires:  meson
+BuildRequires:  meson >= 0.59
 BuildRequires:  vala
 
 BuildRequires:  pkgconfig(flatpak)
@@ -66,6 +66,4 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
-* Wed Nov 15 2023 Fabio Valentini <decathorpe@gmail.com> - 6.2.1-1
-- Initial packaging
-
+%autochangelog
